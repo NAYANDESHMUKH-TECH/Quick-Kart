@@ -2,26 +2,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 
 function CartDrawer({ isOpen, onClose, cart, setCart }) {
-  const updateQuantity = (index, change) => {
-    setCart((currentCart) => {
-      const updatedCart = [...currentCart];
-
-      if (change === -1) {
-        updatedCart.splice(index, 1);
-      }
-
-      return updatedCart;
-    });
+  const updateQuantity = (productId, change) => {
+    setCart((currentCart) =>
+      currentCart
+        .map((item) =>
+          item.id === productId
+            ? {
+                ...item,
+                quantity: item.quantity + change,
+              }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
   };
 
-  const removeItem = (index) => {
+  const removeItem = (productId) => {
     setCart((currentCart) =>
-      currentCart.filter((_, itemIndex) => itemIndex !== index)
+      currentCart.filter((item) => item.id !== productId)
     );
   };
 
   const subtotal = cart.reduce(
-    (total, product) => total + product.price,
+    (total, product) => total + product.price * product.quantity,
     0
   );
 
@@ -44,7 +47,7 @@ function CartDrawer({ isOpen, onClose, cart, setCart }) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25 }}
-            className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white shadow-2xl"
+            className="fixed right-0 top-0 z-[60] flex h-full w-full max-w-md flex-col bg-white shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b px-6 py-5">
@@ -54,7 +57,7 @@ function CartDrawer({ isOpen, onClose, cart, setCart }) {
                 </h2>
 
                 <p className="text-sm text-gray-500">
-                  {cart.length} items
+                  {cart.reduce((total, item) => total + item.quantity, 0)} items
                 </p>
               </div>
 
@@ -82,9 +85,9 @@ function CartDrawer({ isOpen, onClose, cart, setCart }) {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {cart.map((product, index) => (
+                  {cart.map((product) => (
                     <div
-                      key={`${product.id}-${index}`}
+                      key={product.id}
                       className="flex items-center gap-4 rounded-xl border p-3"
                     >
                       {/* Product */}
@@ -105,18 +108,22 @@ function CartDrawer({ isOpen, onClose, cart, setCart }) {
                         {/* Quantity */}
                         <div className="mt-2 flex items-center gap-2">
                           <button
-                            onClick={() => updateQuantity(index, -1)}
+                            onClick={() =>
+                              updateQuantity(product.id, -1)
+                            }
                             className="flex h-7 w-7 items-center justify-center rounded-md border hover:bg-gray-100"
                           >
                             <Minus size={14} />
                           </button>
 
                           <span className="w-5 text-center text-sm font-semibold">
-                            1
+                            {product.quantity}
                           </span>
 
                           <button
-                            onClick={() => updateQuantity(index, 1)}
+                            onClick={() =>
+                              updateQuantity(product.id, 1)
+                            }
                             className="flex h-7 w-7 items-center justify-center rounded-md border hover:bg-gray-100"
                           >
                             <Plus size={14} />
@@ -126,7 +133,7 @@ function CartDrawer({ isOpen, onClose, cart, setCart }) {
 
                       {/* Remove */}
                       <button
-                        onClick={() => removeItem(index)}
+                        onClick={() => removeItem(product.id)}
                         className="text-gray-400 hover:text-red-500"
                       >
                         <Trash2 size={18} />

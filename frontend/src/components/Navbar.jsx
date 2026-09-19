@@ -2,7 +2,7 @@ import { Search, MapPin, User, ShoppingCart } from "lucide-react";
 
 function Navbar({ cart, onCartClick }) {
   return (
-    <nav className="border-b border-gray-200 bg-white">
+    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center gap-8 px-8 py-4">
 
         {/* Logo */}
