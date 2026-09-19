@@ -1,7 +1,11 @@
 import { products } from "../data";
 import ProductCard from "./ProductCard";
 
-function ProductSection({ addToCart }) {
+function ProductSection({ addToCart, searchTerm }) {
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <section className="mx-auto max-w-7xl px-8 py-8">
 
@@ -23,15 +27,29 @@ function ProductSection({ addToCart }) {
       </div>
 
       {/* Product grid */}
-      <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            addToCart={addToCart}
-          />
-        ))}
-      </div>
+      {filteredProducts.length > 0 ? (
+        <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              addToCart={addToCart}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="py-16 text-center">
+          <div className="text-5xl">🔍</div>
+
+          <h3 className="mt-4 text-xl font-semibold text-gray-900">
+            No products found
+          </h3>
+
+          <p className="mt-2 text-gray-500">
+            Try searching for something else.
+          </p>
+        </div>
+      )}
 
     </section>
   );

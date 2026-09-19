@@ -1,6 +1,11 @@
 import { Search, MapPin, User, ShoppingCart } from "lucide-react";
 
-function Navbar({ cart, onCartClick }) {
+function Navbar({
+  cart,
+  onCartClick,
+  searchTerm,
+  setSearchTerm,
+}) {
   return (
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center gap-8 px-8 py-4">
@@ -39,10 +44,12 @@ function Navbar({ cart, onCartClick }) {
           />
 
           <input
-            type="text"
-            placeholder="Search for products..."
-            className="ml-3 w-full bg-transparent text-sm outline-none"
-          />
+  type="text"
+  value={searchTerm}
+  onChange={(event) => setSearchTerm(event.target.value)}
+  placeholder="Search for products..."
+  className="ml-3 w-full bg-transparent text-sm outline-none"
+/>
         </div>
 
         {/* Account */}

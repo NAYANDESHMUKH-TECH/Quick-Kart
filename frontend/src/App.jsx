@@ -9,7 +9,7 @@ import CartDrawer from "./components/CartDrawer";
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
+  const [searchTerm, setSearchTerm] = useState("");
   const addToCart = (product) => {
   setCart((currentCart) => {
     const existingProduct = currentCart.find(
@@ -37,14 +37,19 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar
-        cart={cart}
-        onCartClick={() => setIsCartOpen(true)}
-      />
+  cart={cart}
+  onCartClick={() => setIsCartOpen(true)}
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+/>
 
       <main>
         <Hero />
         <Categories />
-        <ProductSection addToCart={addToCart} />
+        <ProductSection
+  addToCart={addToCart}
+  searchTerm={searchTerm}
+/>
       </main>
 
       <CartDrawer
