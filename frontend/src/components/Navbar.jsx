@@ -1,6 +1,6 @@
 import { Search, MapPin, User, ShoppingCart } from "lucide-react";
 
-function Navbar({ cart }) {
+function Navbar({ cart, onCartClick }) {
   return (
     <nav className="border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center gap-8 px-8 py-4">
@@ -55,8 +55,12 @@ function Navbar({ cart }) {
         </button>
 
         {/* Cart */}
-        <button className="relative flex items-center gap-2 text-gray-700">
-          <ShoppingCart size={23} />
+        <button
+        onClick={onCartClick}
+        className="relative flex items-center gap-2 text-gray-700"
+          >
+            <ShoppingCart size={23} />
+
 
           <span className="font-medium">
             Cart
