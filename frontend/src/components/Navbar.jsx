@@ -1,6 +1,6 @@
 import { Search, MapPin, User, ShoppingCart } from "lucide-react";
 
-function Navbar() {
+function Navbar({ cart }) {
   return (
     <nav className="border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center gap-8 px-8 py-4">
@@ -63,7 +63,7 @@ function Navbar() {
           </span>
 
           <span className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
-            2
+            {cart.length}
           </span>
         </button>
 
