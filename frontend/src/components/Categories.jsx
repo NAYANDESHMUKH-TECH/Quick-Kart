@@ -33,7 +33,7 @@ const categories = [
   },
 ];
 
-function Categories() {
+function Categories({ selectedCategory, setSelectedCategory }) {
   return (
     <section className="mx-auto max-w-7xl px-8 py-8">
 
@@ -63,6 +63,7 @@ function Categories() {
 
           <motion.button
             key={category.name}
+            onClick={() => setSelectedCategory(category.name)}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

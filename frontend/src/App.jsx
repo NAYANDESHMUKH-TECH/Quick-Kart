@@ -10,6 +10,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const addToCart = (product) => {
   setCart((currentCart) => {
     const existingProduct = currentCart.find(
@@ -45,10 +46,14 @@ function App() {
 
       <main>
         <Hero />
-        <Categories />
+        <Categories
+  selectedCategory={selectedCategory}
+  setSelectedCategory={setSelectedCategory}
+/>
         <ProductSection
   addToCart={addToCart}
   searchTerm={searchTerm}
+  selectedCategory={selectedCategory}
 />
       </main>
 

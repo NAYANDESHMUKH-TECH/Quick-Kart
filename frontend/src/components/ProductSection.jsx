@@ -1,10 +1,22 @@
 import { products } from "../data";
 import ProductCard from "./ProductCard";
 
-function ProductSection({ addToCart, searchTerm }) {
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+function ProductSection({
+  addToCart,
+  searchTerm,
+  selectedCategory,
+}) {
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === "All" ||
+      product.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <section className="mx-auto max-w-7xl px-8 py-8">
