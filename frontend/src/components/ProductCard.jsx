@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Plus, ShoppingCart } from "lucide-react";
 
-function ProductCard({ product }) {
+function ProductCard({ product, addToCart }) {
   return (
     <motion.div
       whileHover={{ y: -6 }}
@@ -63,6 +63,7 @@ function ProductCard({ product }) {
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.92 }}
+            onClick={() => addToCart(product)}
             className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500 text-white shadow-md transition-colors hover:bg-orange-600"
             aria-label={`Add ${product.name} to cart`}
           >
