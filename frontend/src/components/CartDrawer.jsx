@@ -91,8 +91,12 @@ function CartDrawer({ isOpen, onClose, cart, setCart }) {
                       className="flex items-center gap-4 rounded-xl border p-3"
                     >
                       {/* Product */}
-                      <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-100 text-3xl">
-                        {product.emoji}
+                      <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-100">
+                        <img
+                        src={product.image}
+                        alt={product.name}
+                      className="h-14 w-14 object-contain"
+                    />
                       </div>
 
                       {/* Details */}
