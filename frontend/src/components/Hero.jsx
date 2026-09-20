@@ -1,20 +1,19 @@
+import workshopImage from "../assets/images/E-commerce-Workshop.png";
+import cartImage from "../assets/images/pngtree-supermarket-cart-with-food-and-beverage-items-png-image_21103524.png";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 function Hero() {
   return (
     <section className="mx-auto max-w-7xl px-8 py-8">
-
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="relative overflow-hidden rounded-3xl bg-[#fff1e8] px-12 py-14"
       >
-
         {/* Text */}
-        <div className="relative z-10 max-w-xl">
-
+        <div className="relative z-30 max-w-xl">
           <p className="mb-3 text-sm font-bold uppercase tracking-wider text-orange-500">
             Quick delivery
           </p>
@@ -39,50 +38,72 @@ function Hero() {
             Shop now
             <ArrowRight size={20} />
           </motion.button>
-
         </div>
 
-        {/* Decorative circles */}
-        <motion.div
-          animate={{ y: [0, -12, 0] }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute right-32 top-12 h-36 w-36 rounded-full bg-yellow-300/70"
-        />
-
-        <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-[-30px] right-10 h-64 w-64 rounded-full bg-orange-300/50"
-        />
-
-        {/* Product visual */}
+        {/* Product Visual */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="absolute right-20 top-1/2 flex -translate-y-1/2 items-center gap-4"
+          className="absolute right-8 top-1/2 h-80 w-[420px] -translate-y-1/2"
         >
+          {/* Yellow circle */}
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute right-24 top-0 h-32 w-32 rounded-full bg-yellow-300/70"
+          />
 
-          <div className="flex h-44 w-32 rotate-[-8deg] items-center justify-center rounded-3xl bg-white text-7xl shadow-xl">
-            🥛
-          </div>
+          {/* Orange circle */}
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-[-20px] right-4 h-52 w-52 rounded-full bg-orange-300/50"
+          />
 
-          <div className="flex h-52 w-36 rotate-[8deg] items-center justify-center rounded-3xl bg-white text-8xl shadow-xl">
-            🛒
-          </div>
+          {/* Left card */}
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute left-20 top-10 z-10 flex h-48 w-36 rotate-[-7deg] items-center justify-center overflow-hidden rounded-3xl bg-white p-4 shadow-xl"
+          >
+            <img
+              src={workshopImage}
+              alt="Quick-Kart shopping"
+              className="h-full w-full object-contain"
+            />
+          </motion.div>
 
+          {/* Right card */}
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute right-10 top-4 z-20 flex h-56 w-40 rotate-[8deg] items-center justify-center overflow-hidden rounded-3xl bg-white p-4 shadow-xl"
+          >
+            <img
+              src={cartImage}
+              alt="Shopping cart"
+              className="h-full w-full object-contain"
+            />
+          </motion.div>
         </motion.div>
-
       </motion.div>
-
     </section>
   );
 }
