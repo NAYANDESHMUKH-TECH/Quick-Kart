@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Plus, ShoppingCart } from "lucide-react";
+import { Plus } from "lucide-react";
 
 function ProductCard({ product, addToCart }) {
   return (
@@ -22,13 +22,13 @@ function ProductCard({ product, addToCart }) {
         </div>
 
         {/* Product */}
-        <motion.div
-          whileHover={{ scale: 1.12, rotate: 3 }}
-          transition={{ type: "spring", stiffness: 300 }}
-          className="text-8xl"
-        >
-          {product.emoji}
-        </motion.div>
+        <motion.img
+  src={product.image}
+  alt={product.name}
+  whileHover={{ scale: 1.08 }}
+  transition={{ type: "spring", stiffness: 300 }}
+  className="h-40 w-40 object-contain"
+/>
 
       </div>
 

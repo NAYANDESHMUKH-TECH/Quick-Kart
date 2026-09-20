@@ -1,3 +1,12 @@
+import milkImage from "./assets/products/Amul-Taaza-Toned-Fresh-Milk.jpeg";
+import bananaImage from "./assets/products/Banana-Raw.webp";
+import breadImage from "./assets/products/brownbread.webp";
+import potatoImage from "./assets/products/potato.png";
+import orangeJuiceImage from "./assets/products/fresh-orange-juice.png";
+import appleImage from "./assets/products/apples.webp";
+import cookiesImage from "./assets/products/Double-Chocolate-Chip-Cookies.jpg";
+import colaImage from "./assets/products/cola-juice.jpg";
+
 export const products = [
   {
     id: 1,
@@ -7,7 +16,7 @@ export const products = [
     originalPrice: 70,
     category: "Dairy",
     unit: "1 L",
-    emoji: "🥛",
+    image: milkImage,
   },
   {
     id: 2,
@@ -17,7 +26,7 @@ export const products = [
     originalPrice: 60,
     category: "Fruits",
     unit: "6 pcs",
-    emoji: "🍌",
+    image: bananaImage,
   },
   {
     id: 3,
@@ -27,7 +36,7 @@ export const products = [
     originalPrice: 55,
     category: "Bakery",
     unit: "400 g",
-    emoji: "🍞",
+    image: breadImage,
   },
   {
     id: 4,
@@ -37,7 +46,7 @@ export const products = [
     originalPrice: 40,
     category: "Snacks",
     unit: "100 g",
-    emoji: "🥔",
+    image: potatoImage,
   },
   {
     id: 5,
@@ -47,7 +56,7 @@ export const products = [
     originalPrice: 110,
     category: "Beverages",
     unit: "1 L",
-    emoji: "🧃",
+    image: orangeJuiceImage,
   },
   {
     id: 6,
@@ -57,7 +66,7 @@ export const products = [
     originalPrice: 140,
     category: "Fruits",
     unit: "500 g",
-    emoji: "🍎",
+    image: appleImage,
   },
   {
     id: 7,
@@ -67,7 +76,7 @@ export const products = [
     originalPrice: 65,
     category: "Snacks",
     unit: "200 g",
-    emoji: "🍪",
+    image: cookiesImage,
   },
   {
     id: 8,
@@ -77,6 +86,6 @@ export const products = [
     originalPrice: 50,
     category: "Beverages",
     unit: "750 ml",
-    emoji: "🥤",
+    image: colaImage,
   },
 ];
