@@ -1,11 +1,13 @@
 import { Search, MapPin, User, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({
   cart,
   onCartClick,
   searchTerm,
   setSearchTerm,
-}) {
+}) { 
+  const navigate = useNavigate();
   return (
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center gap-8 px-8 py-4">
@@ -53,7 +55,10 @@ function Navbar({
         </div>
 
         {/* Account */}
-        <button className="flex items-center gap-2 text-gray-700">
+        <button
+  onClick={() => navigate("/login")}
+  className="flex items-center gap-2 text-gray-700"
+>
           <User size={22} />
 
           <span className="font-medium">

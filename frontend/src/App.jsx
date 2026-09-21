@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import Auth from "./components/Auth";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -105,6 +106,11 @@ function App() {
             />
           }
         />
+
+<Route
+  path="/login"
+  element={<Auth />}
+/>
 
       </Routes>
 
