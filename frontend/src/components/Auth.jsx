@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LogIn, UserPlus } from "lucide-react";
 
-function Auth() {
+function Auth({ setUser }) {
   const [isLogin, setIsLogin] = useState(true);
-
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +38,14 @@ function Auth() {
 
       alert(data.message);
 
-      console.log(data);
+      if (isLogin) {
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("user", JSON.stringify(data.user));
+
+  setUser(data.user);
+
+  navigate("/");
+}
     } catch (error) {
       console.error("Authentication error:", error);
       alert("Unable to connect to the server");

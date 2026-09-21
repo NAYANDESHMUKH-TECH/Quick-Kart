@@ -13,6 +13,13 @@ import { productImages } from "./data";
 function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
+
+  const [user, setUser] = useState(() => {
+  const savedUser = localStorage.getItem("user");
+
+  return savedUser ? JSON.parse(savedUser) : null;
+});
+
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -68,11 +75,13 @@ function App() {
     <div className="min-h-screen bg-gray-50">
 
       <Navbar
-        cart={cart}
-        onCartClick={() => setIsCartOpen(true)}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+  cart={cart}
+  user={user}
+  setUser={setUser}
+  onCartClick={() => setIsCartOpen(true)}
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+/>
 
       <Routes>
 
@@ -109,7 +118,7 @@ function App() {
 
 <Route
   path="/login"
-  element={<Auth />}
+  element={<Auth setUser={setUser} />}
 />
 
       </Routes>
