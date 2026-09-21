@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -7,12 +7,37 @@ import Categories from "./components/Categories";
 import ProductSection from "./components/ProductSection";
 import CartDrawer from "./components/CartDrawer";
 import ProductDetails from "./components/ProductDetails";
+import { productImages } from "./data";
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/products");
+
+        const data = await response.json();
+
+        const formattedProducts = data.map((product) => ({
+          ...product,
+          price: Number(product.price),
+          originalPrice: Number(product.original_price),
+          image: productImages[product.image],
+        }));
+
+        setProducts(formattedProducts);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const addToCart = (product) => {
     setCart((currentCart) => {
@@ -41,7 +66,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
 
-      {/* Navbar */}
       <Navbar
         cart={cart}
         onCartClick={() => setIsCartOpen(true)}
@@ -49,10 +73,8 @@ function App() {
         setSearchTerm={setSearchTerm}
       />
 
-      {/* Pages */}
       <Routes>
 
-        {/* Home Page */}
         <Route
           path="/"
           element={
@@ -65,6 +87,7 @@ function App() {
               />
 
               <ProductSection
+                products={products}
                 addToCart={addToCart}
                 searchTerm={searchTerm}
                 selectedCategory={selectedCategory}
@@ -73,15 +96,18 @@ function App() {
           }
         />
 
-        {/* Product Details */}
         <Route
           path="/product/:id"
-          element={<ProductDetails addToCart={addToCart} />}
+          element={
+            <ProductDetails
+              products={products}
+              addToCart={addToCart}
+            />
+          }
         />
 
       </Routes>
 
-      {/* Cart */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}

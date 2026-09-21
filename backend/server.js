@@ -18,12 +18,14 @@ const db = mysql.createPool({
   port: process.env.DB_PORT,
 });
 
+// Health check
 app.get("/", (req, res) => {
   res.json({
     message: "Quick-Kart backend is running 🚀",
   });
 });
 
+// MySQL connection test
 app.get("/api/test-db", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT 1 AS result");
@@ -38,6 +40,21 @@ app.get("/api/test-db", async (req, res) => {
 
     res.status(500).json({
       message: "MySQL connection failed",
+    });
+  }
+});
+
+// Get all products
+app.get("/api/products", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM products");
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+
+    res.status(500).json({
+      message: "Failed to fetch products",
     });
   }
 });

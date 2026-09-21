@@ -1,7 +1,7 @@
-import { products } from "../data";
 import ProductCard from "./ProductCard";
 
 function ProductSection({
+  products,
   addToCart,
   searchTerm,
   selectedCategory,
@@ -20,8 +20,6 @@ function ProductSection({
 
   return (
     <section className="mx-auto max-w-7xl px-8 py-8">
-
-      {/* Section heading */}
       <div className="mb-6 flex items-end justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wider text-orange-500">
@@ -38,7 +36,6 @@ function ProductSection({
         </button>
       </div>
 
-      {/* Product grid */}
       {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
           {filteredProducts.map((product) => (
@@ -62,7 +59,6 @@ function ProductSection({
           </p>
         </div>
       )}
-
     </section>
   );
 }

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { products } from "../data";
 
-function ProductDetails({ addToCart }) {
+function ProductDetails({ products, addToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -40,8 +39,6 @@ function ProductDetails({ addToCart }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-      {/* Back */}
       <div className="mx-auto max-w-7xl px-8 pt-6">
         <button
           onClick={() => navigate(-1)}
@@ -52,12 +49,9 @@ function ProductDetails({ addToCart }) {
         </button>
       </div>
 
-      {/* Product */}
       <main className="mx-auto max-w-7xl px-8 py-10">
-
         <div className="grid gap-10 rounded-3xl bg-white p-8 shadow-sm md:grid-cols-2">
 
-          {/* Image */}
           <div className="flex min-h-[450px] items-center justify-center rounded-2xl bg-gray-50">
             <img
               src={product.image}
@@ -66,9 +60,7 @@ function ProductDetails({ addToCart }) {
             />
           </div>
 
-          {/* Information */}
           <div className="flex flex-col justify-center">
-
             <p className="text-sm font-semibold uppercase tracking-wider text-orange-500">
               {product.category}
             </p>
@@ -81,7 +73,6 @@ function ProductDetails({ addToCart }) {
               {product.description}
             </p>
 
-            {/* Price */}
             <div className="mt-6 flex items-center gap-3">
               <span className="text-3xl font-bold text-gray-900">
                 ₹{product.price}
@@ -105,14 +96,12 @@ function ProductDetails({ addToCart }) {
               Pack size: {product.unit}
             </p>
 
-            {/* Quantity */}
             <div className="mt-8">
               <p className="mb-2 text-sm font-semibold text-gray-700">
                 Quantity
               </p>
 
               <div className="flex w-fit items-center gap-4 rounded-xl border border-gray-200 p-2">
-
                 <button
                   onClick={() =>
                     setQuantity((current) =>
@@ -136,11 +125,9 @@ function ProductDetails({ addToCart }) {
                 >
                   <Plus size={18} />
                 </button>
-
               </div>
             </div>
 
-            {/* Add to Cart */}
             <button
               onClick={handleAddToCart}
               className="mt-8 flex items-center justify-center gap-3 rounded-xl bg-orange-500 px-6 py-4 text-lg font-semibold text-white shadow-lg shadow-orange-200 transition hover:bg-orange-600"
@@ -148,12 +135,9 @@ function ProductDetails({ addToCart }) {
               <ShoppingCart size={22} />
               Add {quantity} to Cart
             </button>
-
           </div>
-
         </div>
 
-        {/* Description */}
         <div className="mt-8 rounded-3xl bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-gray-900">
             Product information
@@ -165,7 +149,6 @@ function ProductDetails({ addToCart }) {
             available for quick delivery.
           </p>
         </div>
-
       </main>
     </div>
   );
