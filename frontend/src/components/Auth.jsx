@@ -13,8 +13,8 @@ function Auth({ setUser }) {
     event.preventDefault();
 
     const endpoint = isLogin
-      ? "http://localhost:5000/api/login"
-      : "http://localhost:5000/api/register";
+      ? "/api/login"
+: "/api/register";
 
     const body = isLogin
       ? { email, password }
