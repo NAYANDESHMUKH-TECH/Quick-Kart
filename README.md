@@ -66,52 +66,102 @@ A custom VPC was created with:
 CIDR: 10.0.0.0/16
 
 The VPC was divided across two Availability Zones.
+
 Public Subnets
+
 AZ-A → 10.0.1.0/24
+
 AZ-B → 10.0.2.0/24
 
 The Web Tier EC2 instances and Public Application Load Balancer were deployed in the public subnets.
+
 Private Application Subnets
+
 AZ-A → 10.0.11.0/24
+
 AZ-B → 10.0.12.0/24
+
 The Node.js application servers were deployed in private subnets.
+
 Private Database Subnets
+
 AZ-A → 10.0.21.0/24
+
 AZ-B → 10.0.22.0/24
 
 Amazon RDS MySQL was deployed using private database subnets.
+
 🔄 Application Flow
+
 User
+
   ↓
+  
 Public ALB
+
   ↓
+  
 Nginx + React
+
   ↓
+  
 Internal ALB
+
   ↓
+  
 Node.js + Express
+
   ↓
+  
 Amazon RDS MySQL
 
 Nginx was configured as a reverse proxy to forward API requests from the frontend to the internal Application Load Balancer.
+
+
 🔐 Security
+
+
 Security Groups were configured to control communication between the different tiers.
+
 Internet
-   ↓ HTTP :80
+
+ ↓ 
+ 
+ HTTP :80
+   
 Public ALB
-   ↓ HTTP :80
+
+   ↓ 
+   
+   HTTP :80
+   
 Web EC2
-   ↓ TCP :8080
+
+   ↓ 
+   
+   TCP :8080
+   
 Internal ALB
-   ↓ TCP :8080
+
+   ↓ 
+   
+   TCP :8080
+   
 Application EC2
-   ↓ MySQL :3306
+
+   ↓
+   
+   MySQL :3306
+   
 RDS MySQL
 
 
 The application and database tiers were kept in private subnets.
+
 AWS Systems Manager Session Manager was used to access the private EC2 instances without requiring a bastion host.
+
 🗄️ Database
+
 MySQL was used as the application database.
 The existing Quick-Kart product data was migrated from the local MySQL database to Amazon RDS.
 Main database tables:
@@ -119,7 +169,9 @@ products
 users
 
 Database credentials were stored using environment variables and were not committed to GitHub.
+
 🛒 Features
+
 - Product browsing
 - Product search
 - Shopping cart
@@ -183,6 +235,7 @@ The production build is generated inside:
 frontend/dist/
 
 📚 What I Learned
+
 This project gave me hands-on experience with:
 - AWS VPC networking
 - Public and private subnets
